@@ -14,7 +14,7 @@ pipeline {
       steps {
         withSonarQubeEnv('SONAR_LATEST') {
         
-        sh 'npm install sonar:sonar'
+        sh 'npm install sonarqube'
         }
         
       }
