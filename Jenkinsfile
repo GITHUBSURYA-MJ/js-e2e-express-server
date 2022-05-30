@@ -12,7 +12,10 @@ pipeline {
      
     stage('Build') {
       steps {
-        sh 'npm install'
+        withSonarQubeEnv('SONAR_LATEST') {
+        
+        sh 'npm install sonar:sonar'
+        }
         
       }
     }  
