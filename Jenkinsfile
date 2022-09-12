@@ -1,28 +1,29 @@
 pipeline {
-  agent { label "NODE1"}
+    agent { label 'tomcat' }
+    stages {
+        stage('SCM Checkout') {
+            steps{
+            git url: 'https://github.com/InnaPavan/js-e2e-express-server.git', branch: "main"
+            }
+        }
+         
+         stage('Build Image') {
+             steps {
+                 script {
+                     dockerImage = docker.build("innapavan/nodeexpress:v1")
+                    }
+                 }
+             }
 
-    
-  stages {
-        
-    stage('Git') {
-      steps {
-        git branch: 'main', url: 'https://github.com/InnaPavan/js-e2e-express-server.git'
-      }
-    }
-     
-    stage('Build') {
-      steps {
-        withSonarQubeEnv('SONAR_LATEST') {
-        
-        sh 'npm install sonarqube'
-        }
-        
-      }
-    }  
-    stage ('Build'){
-            sh 'npm run build'
-        }
-    }
-            
-  }
-}
+         stage('Push Image') {
+             steps {
+                 script {
+                     docker.withRegistery('', 'docke_id')
+                       {
+                     dockerImage.push()
+                    }
+                 }
+             }
+           }
+         }
+     }
