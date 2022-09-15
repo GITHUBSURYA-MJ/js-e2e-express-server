@@ -1,6 +1,7 @@
 pipeline {
     agent { label 'tomcat' }
     environment {
+                VERSION = "${env.BUILD_ID}"
 		DOCKERHUB_CREDENTIALS=credentials('docke_id')
 	}
     stages {
@@ -11,7 +12,7 @@ pipeline {
                  }
     	stage('Build') {
 	    steps {
-	     sh 'docker build -t innapavan/nodeapp:latest .'
+	     sh 'docker build -t innapavan/nodeapp:${VERSION} .'
 			}
 		}
      	stage('Login') {
@@ -21,7 +22,7 @@ pipeline {
 		}
        	stage('Push') {
 		steps {
-		sh 'docker push innapavan/nodeapp:latest'
+		sh 'docker push innapavan/nodeapp:${VERSION}'
 			}
 		}
 
