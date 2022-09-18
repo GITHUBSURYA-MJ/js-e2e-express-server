@@ -3,7 +3,7 @@ pipeline {
     environment {
                 VERSION = "${env.BUILD_ID}"
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub_paws')
-	
+	}
     stages {
         stage('SCM Checkout') {
             steps{
@@ -29,4 +29,4 @@ pipeline {
              }
      }
 
-}
+
