@@ -12,7 +12,7 @@ pipeline {
                  }
     	stage('Build') {
 	    steps {
-	     sh 'docker build -t suryaDocker/nodeapp:${VERSION} .'
+	     sh 'docker build -t surya47/nodeapp:${VERSION} .'
 			}
 		}
      	stage('Login') {
