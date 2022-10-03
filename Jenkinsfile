@@ -26,6 +26,19 @@ pipeline {
 		sh 'docker push surya47/nodeapp:${VERSION}'
 			}
 		}
+	 stage('deploy_Appliction as Docker Continer into dckr server'){
+		 
+                sshagent(['Dockr_pem_key']) {
+                sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.9.58 docker rm -f nodeapp || true"
+            
+                sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.9.58 docker run -d -p 3000:3000 --name nodeapp surya47/nodeapp:${VERSION}"
+        
+        }
+       
+       
+       
+        
+    }   
 
              }
      }
