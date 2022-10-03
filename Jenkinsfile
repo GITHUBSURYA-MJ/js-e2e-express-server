@@ -34,9 +34,9 @@ pipeline {
             
                   sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.9.58 docker run -d -p 3000:3000 --name nodeapp surya47/nodeapp:${VERSION}"
         
-        }
+                  }
        
-       
+		 }
        
         
     }   
